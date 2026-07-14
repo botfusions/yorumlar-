@@ -1,0 +1,18 @@
+# Botfusions Insights
+
+> Botfusions Insights — AI, Agentic Systems ve GEO (Generative Engine Optimization) üzerine bağımsız bir Türkçe teknoloji yayını. Haberleri kopyalamaz; gelişmeleri analiz eder, gerçek testlerle sınar ve yorumlar. Yazar: Cenk Tokgöz (Botfusions Founder). Güncel tarih bağlamı: 14 Temmuz 2026.
+
+## Yayın türleri
+- **Bugün Teknolojide**: günlük, hızlı tüketilen haber akışı (saat + kategori + başlık).
+- **Derin Analiz**: kalıcı yorum odaklı, daha uzun içerikler.
+- **Test Ediyoruz**: piyasadaki iddiaları gerçek deneylerle sınayan bölüm (iddia → test süresi → sonuç).
+- Her haber **Ne oldu? / Neden önemli? / Kimi etkiliyor? / Botfusions Yorumu** yapısıyla yazılır.
+
+## Sayfalar
+- [Ana sayfa](https://botfusions.com/): günün manşeti, günlük akış, derin analiz, testler ve kategoriler (AI, Agentic, GEO & AI Search).
+- [Makale örneği — AI Ajanları Artık Sadece Konuşmuyor, İş Yapıyor](https://botfusions.com/article.html): agent platformlarının iş dünyasına etkisi; Ne oldu / Neden önemli / Kimi etkiliyor / Botfusions Yorumu yapısı, karşılaştırma tablosu ve kaynaklar.
+- [GEO & AI Search kategorisi](https://botfusions.com/category.html): ChatGPT, Gemini ve Perplexity'de marka görünürlüğü üzerine analizler, ölçüm ve etik.
+
+## İsteğe bağlı bağlantılar
+- [Ana marka](https://botfusions.com)
+- [GEO Hizmeti](https://botfusions.com/geo-hizmeti)
