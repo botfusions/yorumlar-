@@ -1,0 +1,31 @@
+# Botfusions Insights — Netlify yapılandırması
+# Statik HTML sitesi; build adımı yok.
+
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+# Statik varlıklar kısa önbelleğe alınır (içerik günlük güncellendiği için
+# hash'siz dosyalarda uzun immutable önbellek yerine güvenli süre tercih edildi)
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+# HTML her zaman tazelenir (haber akışı dinamik)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
