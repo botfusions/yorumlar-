@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GEO &amp; AI Search — Botfusions Insights</title>
+  <meta name="description" content="GEO ve AI arama görünürlüğü üzerine Botfusions analizleri: ChatGPT, Gemini ve Perplexity'de marka görünürlüğü, alıntı ekonomisi ve ölçüm." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+  <style>
+    /* ---------- Category hero ---------- */
+    .cat-hero { padding-top: clamp(2.5rem,5vw,4rem); padding-bottom: clamp(2rem,4vw,3rem); border-bottom: 1px solid var(--border); }
+    .cat-hero .crumb { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 1.5rem; }
+    .cat-hero .crumb a:hover { color: var(--accent-2); }
+    .cat-hero h1 { font-size: clamp(2.4rem, 6vw, 4.5rem); letter-spacing: -0.035em; line-height: 0.98; font-weight: 700; margin-bottom: 1rem; }
+    .cat-hero h1 em { font-style: normal; color: var(--accent-2); }
+    .cat-hero p { max-width: 52ch; color: var(--fg-2); font-size: var(--fs-lead); }
+
+    /* Filter chips */
+    .filters { display:flex; gap:0.5rem; flex-wrap:wrap; padding-block: 1.5rem; border-bottom: 1px solid var(--border); }
+    .chip {
+      font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; color: var(--fg-2);
+      border:1px solid var(--border-2); padding: 0.5rem 0.9rem; border-radius: var(--radius-pill); cursor: pointer;
+      transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+    }
+    .chip:hover { color: var(--fg); border-color: var(--fg-3); }
+    .chip.is-active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .filter-count { margin-left:auto; align-self:center; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.1em; color: var(--fg-3); }
+
+    /* Layout: feed + sidebar */
+    .cat-body { display:grid; grid-template-columns: 1fr 300px; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; padding-top: clamp(2rem,4vw,3rem); }
+    @media (max-width: 900px) { .cat-body { grid-template-columns: 1fr; } }
+
+    /* Featured */
+    .feat { display:grid; grid-template-columns: 1.1fr 1fr; gap: clamp(1.25rem, 3vw, 2rem); align-items: center; padding-bottom: clamp(2rem,4vw,3rem); border-bottom: 1px solid var(--border); margin-bottom: clamp(2rem,4vw,3rem); }
+    @media (max-width: 640px) { .feat { grid-template-columns: 1fr; } }
+    .feat .cover { aspect-ratio: 4/3; }
+    .feat .cover .mono-mark { font-size: 14rem; right:-1rem; bottom:-2rem; }
+    .feat .card-cat { color: var(--accent-2); }
+    .feat .card-title { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+    .feat .card-dek { font-size: var(--fs-body); }
+
+    /* Grid feed */
+    .feed-grid { display:grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem,3vw,2.5rem) clamp(1.25rem,2.5vw,2rem); }
+    @media (max-width: 640px) { .feed-grid { grid-template-columns: 1fr; } }
+    .feed-card .cover { aspect-ratio: 16/10; margin-bottom: 1rem; }
+    .feed-card .cover .mono-mark { font-size: 9rem; right:-0.5rem; bottom:-1.5rem; }
+    .feed-card .card-title { font-size: 1.2rem; }
+
+    /* Sidebar */
+    .side-block { position: sticky; top: 90px; display:flex; flex-direction:column; gap: 2.5rem; }
+    @media (max-width: 900px) { .side-block { position: static; } }
+    .side-block h3 { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 1rem; font-weight: 500; }
+    .side-list a { display:block; padding: 0.9rem 0; border-top: 1px solid var(--border); }
+    .side-list a:last-child { border-bottom: 1px solid var(--border); }
+    .side-list .n { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--accent); display:block; margin-bottom: 0.3rem; }
+    .side-list .t { font-family: var(--font-display); font-weight: 600; font-size: 0.98rem; line-height: 1.25; letter-spacing: -0.01em; transition: color var(--dur) var(--ease); }
+    .side-list a:hover .t { color: var(--accent-2); }
+    .side-list .m { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--fg-3); letter-spacing: 0.04em; margin-top: 0.3rem; }
+
+    .side-promo { padding: 1.5rem; border:1px solid var(--border); border-radius: var(--radius-lg); background: var(--bg-2); }
+    .side-promo h4 { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .side-promo p { font-size: var(--fs-sm); color: var(--fg-3); margin-bottom: 1rem; line-height: 1.6; }
+
+    .pagination { display:flex; justify-content:center; align-items:center; gap:0.4rem; padding-top: clamp(2.5rem,5vw,4rem); }
+    .pagination button { width:38px; height:38px; border:1px solid var(--border-2); border-radius: var(--radius); color: var(--fg-2); font-family: var(--font-mono); font-size: var(--fs-sm); transition: all var(--dur) var(--ease); }
+    .pagination button:hover { border-color: var(--accent-line); color: var(--accent-2); }
+    .pagination button.is-active { background: var(--accent); color:#fff; border-color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Botfusions Insights ana sayfa">
+        <span class="mark" aria-hidden="true"></span> BOTFUSIONS
+      </a>
+      <nav class="nav" aria-label="Birincil navigasyon">
+        <a href="index.html#bugun">Haberler</a>
+        <a href="index.html#ai">AI</a>
+        <a href="index.html#agentic">Agentic</a>
+        <a href="category.html" aria-current="true">GEO</a>
+        <a href="index.html#analiz">Analiz</a>
+        <a href="index.html#rehberler">Rehberler</a>
+      </nav>
+      <div class="header-actions">
+        <a class="ext-link" href="https://botfusions.com" target="_blank" rel="noopener">botfusions.com</a>
+        <button class="icon-btn" data-search-open aria-label="Ara">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        </button>
+        <a class="btn btn--primary" href="index.html#newsletter">Abone Ol</a>
+        <button class="icon-btn menu-btn" aria-label="Menü" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="Mobil navigasyon">
+    <a href="index.html#bugun">Haberler</a>
+    <a href="index.html#ai">AI</a>
+    <a href="index.html#agentic">Agentic</a>
+    <a href="category.html">GEO &amp; AI Search</a>
+    <a href="index.html#analiz">Analiz</a>
+    <a href="index.html#rehberler">Rehberler</a>
+    <a href="index.html#newsletter" style="border:0;color:var(--accent-2);margin-top:1rem">Abone Ol →</a>
+  </nav>
+
+  <div class="search-overlay" role="dialog" aria-modal="true" aria-label="Arama">
+    <button class="icon-btn search-close" data-search-close aria-label="Kapat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="search-box">
+      <input type="text" placeholder="Ara: GEO, ajanlar, modeller…" aria-label="Arama metni">
+      <p class="search-hint">ENTER ile ara · ESC ile kapat</p>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===== Category hero ===== -->
+    <section class="cat-hero">
+      <div class="container-wide container">
+        <nav class="crumb reveal" aria-label="Yol"><a href="index.html">Ana sayfa</a> <span>/</span> <span>Kategori</span></nav>
+        <h1 class="reveal">GEO &amp; <em>AI Search</em></h1>
+        <p class="reveal" data-delay="1">ChatGPT, Gemini, Perplexity ve diğer AI arama sistemlerinde görünürlük. Eski SEO playboook'unu bir kenara bırakıp modelin neye güvendiğini anlamaya çalışıyoruz.</p>
+      </div>
+    </section>
+
+    <!-- ===== Filters ===== -->
+    <div class="container-wide container">
+      <div class="filters reveal" role="tablist" aria-label="Alt konu filtreleri">
+        <button class="chip is-active" data-filter="all">Tümü</button>
+        <button class="chip" data-filter="gorunurluk">Görünürlük</button>
+        <button class="chip" data-filter="olcum">Ölçüm</button>
+        <button class="chip" data-filter="etik">Etik</button>
+        <button class="chip" data-filter="rehber">Rehber</button>
+        <span class="filter-count">12 yazı</span>
+      </div>
+    </div>
+
+    <!-- ===== Body ===== -->
+    <section class="section" style="padding-top: clamp(1.5rem,3vw,2rem)">
+      <div class="container-wide container">
+        <div class="cat-body">
+
+          <!-- Feed -->
+          <div>
+            <!-- Featured -->
+            <a href="article.html" class="feat card reveal">
+              <div class="cover cover--violet"><span class="tag">Öne çıkan</span><span class="grid-lines"></span><span class="mono-mark">GEO</span><span class="gloss"></span></div>
+              <div>
+                <span class="card-cat">GEO · Derin Analiz</span>
+                <h2 class="card-title" style="margin:0.5rem 0">GEO nedir, değildir? Klasik SEO zihniyetini neden işe yaramaz</h2>
+                <p class="card-dek">Yapay zekâ aramasında görünürlük, anahtar kelimelerle değil modelin neye güvendiğiyle ilgili. Eski playboook'u bir kenara bırakma zamanı.</p>
+                <span class="meta" style="margin-top:1rem"><span>9 dk okuma</span><span class="sep">·</span><span>Cenk Tokgöz</span><span class="sep">·</span><span>14 Temmuz 2026</span></span>
+              </div>
+            </a>
+
+            <!-- Grid -->
+            <div class="feed-grid">
+              <a href="article.html" class="feed-card card reveal" data-tag="etik">
+                <div class="cover cover--rose"><span class="tag">GEO</span><span class="grid-lines"></span><span class="mono-mark">GEO</span><span class="gloss"></span></div>
+                <span class="card-cat">Etik · 12 dk</span>
+                <h3 class="card-title">Reddit'e Sahte Hesap Açmak GEO mudur?</h3>
+                <p class="card-dek">Manipülasyon ile meşru görünürlük arasındaki çizgi.</p>
+              </a>
+              <a href="article.html" class="feed-card card reveal" data-delay="1" data-tag="gorunurluk">
+                <div class="cover cover--ink"><span class="tag">GEO</span><span class="grid-lines"></span><span class="mono-mark">GPT</span><span class="gloss"></span></div>
+                <span class="card-cat">Görünürlük · 8 dk</span>
+                <h3 class="card-title">Bir Marka GPT'de Neden Görünür?</h3>
+                <p class="card-dek">Model hangi kaynakları hatırlıyor, hangilerini uyduruyor?</p>
+              </a>
+              <a href="article.html" class="feed-card card reveal" data-tag="olcum">
+                <div class="cover cover--cyan"><span class="tag">GEO</span><span class="grid-lines"></span><span class="mono-mark">MET</span><span class="gloss"></span></div>
+                <span class="card-cat">Ölçüm · 8 dk</span>
+                <h3 class="card-title">GEO ölçümü: hangi metrik anlamlı, hangisi yanıltıcı?</h3>
+                <p class="card-dek">Tıklama yok; o halde başarı nasıl ölçünür?</p>
+              </a>
+              <a href="article.html" class="feed-card card reveal" data-delay="1" data-tag="gorunurluk">
+                <div class="cover cover--amber"><span class="tag">GEO</span><span class="grid-lines"></span><span class="mono-mark">SRC</span><span class="gloss"></span></div>
+                <span class="card-cat">Görünürlük · 7 dk</span>
+                <h3 class="card-title">AI aramada alıntı ekonomisi: kim öne çıkıyor?</h3>
+                <p class="card-dek">Kaynak gösterme davranışı hangi siteleri kayırıyor?</p>
+              </a>
+              <a href="article.html" class="feed-card card reveal" data-tag="rehber">
+                <div class="cover cover--ink"><span class="tag">Rehber</span><span class="grid-lines"></span><span class="mono-mark">XML</span><span class="gloss"></span></div>
+                <span class="card-cat">Rehber · 6 dk</span>
+                <h3 class="card-title">Yapısal veri ve şema: hâlâ bir önemi var mı?</h3>
+                <p class="card-dek">Modelin anlayacağı yapıyı kurmanın pratik yolları.</p>
+              </a>
+              <a href="article.html" class="feed-card card reveal" data-delay="1" data-tag="rehber">
+                <div class="cover cover--violet"><span class="tag">Rehber</span><span class="grid-lines"></span><span class="mono-mark">GEO</span><span class="gloss"></span></div>
+                <span class="card-cat">Rehber · 10 dk</span>
+                <h3 class="card-title">Marka varlığını AI belleğinde güçlendirmek</h3>
+                <p class="card-dek">Tutarlı kimlik, kaynaklanabilir bilgi ve tekrar.</p>
+              </a>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination reveal">
+              <button disabled style="opacity:0.4">‹</button>
+              <button class="is-active">1</button>
+              <button>2</button>
+              <button>3</button>
+              <button>›</button>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="side-block">
+            <div class="reveal">
+              <h3>Bu kategoride en çok okunanlar</h3>
+              <div class="side-list">
+                <a href="article.html"><span class="n">01</span><span class="t">Reddit'e Sahte Hesap Açmak GEO mudur?</span><span class="m">Etik · 12 dk</span></a>
+                <a href="article.html"><span class="n">02</span><span class="t">Bir Marka GPT'de Neden Görünür?</span><span class="m">Görünürlük · 8 dk</span></a>
+                <a href="article.html"><span class="n">03</span><span class="t">GEO ölçümü: doğru metrik hangisi?</span><span class="m">Ölçüm · 8 dk</span></a>
+                <a href="article.html"><span class="n">04</span><span class="t">AI aramada alıntı ekonomisi</span><span class="m">Görünürlük · 7 dk</span></a>
+                <a href="article.html"><span class="n">05</span><span class="t">Şema hâlâ işe yarıyor mu?</span><span class="m">Rehber · 6 dk</span></a>
+              </div>
+            </div>
+
+            <div class="side-promo reveal" data-delay="1">
+              <h4>Botfusions GEO Hizmeti</h4>
+              <p>Markanızın AI arama sistemlerinde görünürlüğünü ölçmek ve büyütmek istiyorsanız, işin başında ölçümle başlayalım.</p>
+              <a class="btn btn--ghost btn--block" href="https://botfusions.com/geo-hizmeti" target="_blank" rel="noopener">İncele →</a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container-wide container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="brand" style="margin-bottom:1rem"><span class="mark" aria-hidden="true"></span> BOTFUSIONS</a>
+          <p style="color:var(--fg-3);font-size:var(--fs-sm);max-width:32ch;line-height:1.6">Teknoloji haberlerini kopyalamıyor; analiz ediyor, test ediyor ve yorumluyoruz. Bağımsız bir AI, Agentic ve GEO yayını.</p>
+        </div>
+        <div class="footer-col"><h4>Kategoriler</h4><a href="index.html#ai">AI</a><a href="index.html#agentic">Agentic</a><a href="category.html">GEO &amp; AI Search</a><a href="index.html#analiz">Analiz</a><a href="index.html#rehberler">Rehberler</a></div>
+        <div class="footer-col"><h4>Yayın</h4><a href="index.html#bugun">Bugün Teknolojide</a><a href="index.html#analiz">Derin Analiz</a><a href="index.html#rehberler">Test Ediyoruz</a><a href="index.html#newsletter">Bülten</a></div>
+        <div class="footer-col"><h4>Botfusions</h4><a href="https://botfusions.com" target="_blank" rel="noopener">botfusions.com</a><a href="https://botfusions.com/geo-hizmeti" target="_blank" rel="noopener">GEO Hizmeti</a><a href="index.html#newsletter">İletişim</a></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year></span> Botfusions · Tüm hakları saklıdır</span>
+        <span>Gürültüyü değil, önemli olanı takip et.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Filter chips
+    (function(){
+      var chips = document.querySelectorAll('.chip[data-filter]');
+      var cards = document.querySelectorAll('.feed-card');
+      var count = document.querySelector('.filter-count');
+      chips.forEach(function(c){
+        c.addEventListener('click', function(){
+          chips.forEach(function(x){ x.classList.remove('is-active'); });
+          c.classList.add('is-active');
+          var f = c.getAttribute('data-filter');
+          var shown = 0;
+          cards.forEach(function(card){
+            var match = (f === 'all') || (card.getAttribute('data-tag') === f);
+            card.style.display = match ? '' : 'none';
+            if (match) shown++;
+          });
+          if (count) count.textContent = shown + ' yazı';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+# Open Design iç metaveri (site kaynağının parçası değil)
+*.artifact.json
+.od/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs & local
+*.log
+.env
+.env.local
+
+# Node (gelecekte gerekirse)
+node_modules/

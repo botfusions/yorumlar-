@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Ajanları Artık Sadece Konuşmuyor, İş Yapıyor — Botfusions Insights</title>
+  <meta name="description" content="OpenAI, Anthropic ve yeni agent platformlarının son hamleleri iş dünyasını nasıl değiştirecek? Ne oldu, neden önemli, kimi etkiliyor ve Botfusions yorumu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+  <style>
+    /* ---------- Article layout ---------- */
+    .article-head { padding-top: clamp(2.5rem, 5vw, 4rem); padding-bottom: clamp(2rem, 4vw, 3rem); }
+    .crumb { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg-3); display: flex; gap: 0.6rem; align-items: center; margin-bottom: 1.5rem; }
+    .crumb a:hover { color: var(--accent-2); }
+    .article-head h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); letter-spacing: -0.035em; line-height: 1.02; font-weight: 700; margin-bottom: 1.25rem; max-width: 18ch; }
+    .article-dek { font-size: var(--fs-lead); color: var(--fg-2); max-width: 52ch; margin-bottom: 2rem; }
+    .byline-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+    .byline-row .byline-avatar { width: 38px; height: 38px; }
+    .byline-row .who { font-weight: 600; color: var(--fg); font-family: var(--font-display); }
+    .byline-row .meta { margin-left: auto; }
+
+    .article-cover { aspect-ratio: 21/9; margin: 0 0 clamp(3rem, 6vw, 5rem); }
+    .article-cover .mono-mark { font-size: 26rem; right: -2rem; bottom: -8rem; }
+    .article-cover .ring { position:absolute; left:62%; top:50%; transform:translate(-50%,-50%); width:46%; aspect-ratio:1; border-radius:50%; border:1px solid rgba(255,255,255,0.10); box-shadow: inset 0 0 90px rgba(109,74,255,0.3); }
+    .article-cover .core { position:absolute; left:62%; top:50%; transform:translate(-50%,-50%); width:11%; aspect-ratio:1; border-radius:50%; background: radial-gradient(circle at 35% 30%, #c0aaff, var(--accent) 60%, #3a1f9e); box-shadow: 0 0 70px rgba(109,74,255,0.7); }
+
+    /* ---------- Prose ---------- */
+    .prose { max-width: var(--reading); margin-inline: auto; }
+    .prose > * + * { margin-top: 1.4rem; }
+    .prose h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); margin-top: 3rem; letter-spacing: -0.025em; scroll-margin-top: 90px; }
+    .prose h2:first-child { margin-top: 0; }
+    .prose h2 .kicker { display:block; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.6rem; font-weight: 500; }
+    .prose p { font-size: 1.0625rem; line-height: 1.75; color: var(--fg-2); }
+    .prose strong { color: var(--fg); font-weight: 600; }
+    .prose a { color: var(--accent-2); border-bottom: 1px solid var(--border-2); }
+    .prose a:hover { border-color: var(--accent-line); }
+    .prose ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .prose ul li { position: relative; padding-left: 1.5rem; color: var(--fg-2); font-size: 1.0625rem; line-height: 1.7; }
+    .prose ul li::before { content: ''; position: absolute; left: 0; top: 0.7em; width: 8px; height: 1px; background: var(--accent); }
+
+    /* Botfusions comment callout */
+    .comment {
+      margin: 2.5rem 0;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      border-left: 2px solid var(--accent);
+      background: linear-gradient(90deg, var(--accent-soft), transparent 70%);
+      border-radius: var(--radius);
+    }
+    .comment .label { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.75rem; font-weight: 600; display:flex; align-items:center; gap:0.5rem; }
+    .comment p { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.4; letter-spacing: -0.015em; color: var(--fg); }
+
+    /* Pull quote */
+    .pullquote { margin: 2.75rem 0; padding: 1.5rem 0; border-top: 1px solid var(--border-2); border-bottom: 1px solid var(--border-2); }
+    .pullquote p { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.3; letter-spacing: -0.02em; color: var(--fg); }
+    .pullquote cite { display:block; margin-top:1rem; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-3); font-style: normal; }
+
+    /* Data block */
+    .datablock { margin: 2.5rem 0; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+    .datablock .head { padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); background: var(--surface); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--fg-3); display:flex; justify-content:space-between; }
+    .datablock table { width: 100%; border-collapse: collapse; }
+    .datablock th, .datablock td { text-align: left; padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--border); font-size: var(--fs-sm); }
+    .datablock th { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; color: var(--fg-3); text-transform: uppercase; font-weight: 500; }
+    .datablock td { color: var(--fg-2); }
+    .datablock td:first-child { color: var(--fg); font-family: var(--font-display); font-weight: 500; }
+    .datablock td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; color: var(--accent-2); }
+    .datablock tr:last-child td { border-bottom: 0; }
+    .datablock-wrap { overflow-x: auto; }
+    @media (max-width: 560px) { .datablock th:nth-child(3), .datablock td:nth-child(3) { display: none; } }
+
+    /* Code-ish block */
+    .codeblock { margin: 2.5rem 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+    .codeblock .head { padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.1em; color: var(--fg-3); display:flex; align-items:center; gap:0.5rem; }
+    .codeblock .head .dots { display:flex; gap:5px; }
+    .codeblock .head .dots i { width:8px; height:8px; border-radius:50%; background:var(--border-2); }
+    .codeblock pre { margin:0; padding:1.25rem; font-family: var(--font-mono); font-size: 0.85rem; line-height:1.7; color: var(--fg-2); overflow-x:auto; }
+    .codeblock .k { color: var(--accent-2); }
+    .codeblock .c { color: var(--muted); }
+
+    /* Sources */
+    .sources { margin-top: 3rem; padding-top: 1.75rem; border-top: 1px solid var(--border); }
+    .sources h3 { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-3); margin-bottom: 1rem; font-weight: 500; }
+    .sources ol { counter-reset: s; display:flex; flex-direction:column; gap:0.6rem; }
+    .sources li { counter-increment: s; font-size: var(--fs-sm); color: var(--fg-3); padding-left: 2rem; position: relative; }
+    .sources li::before { content: counter(s, decimal-leading-zero); position: absolute; left: 0; font-family: var(--font-mono); color: var(--accent-2); }
+
+    /* Tags + share */
+    .post-foot { max-width: var(--reading); margin: 3rem auto 0; padding-top: 1.75rem; border-top: 1px solid var(--border); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
+    .tags { display:flex; gap:0.5rem; flex-wrap:wrap; }
+    .tag-chip { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; color: var(--fg-2); border:1px solid var(--border-2); padding:5px 10px; border-radius: var(--radius); transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease); }
+    .tag-chip:hover { color: var(--accent-2); border-color: var(--accent-line); }
+    .share { display:flex; gap:0.3rem; }
+
+    /* Author card */
+    .author-card { max-width: var(--reading); margin: clamp(3rem,6vw,4.5rem) auto 0; padding: clamp(1.5rem,3vw,2.25rem); border:1px solid var(--border); border-radius: var(--radius-lg); display:flex; gap:1.5rem; align-items:flex-start; background: var(--bg-2); }
+    @media (max-width: 560px) { .author-card { flex-direction: column; } }
+    .author-card .avatar-lg { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(150deg, var(--accent), #3a1f9e); flex-shrink:0; display:grid; place-items:center; font-family: var(--font-display); font-weight:700; font-size: 1.5rem; color:#fff; }
+    .author-card h3 { font-size: 1.3rem; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+    .author-card .role { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 0.75rem; }
+    .author-card p { font-size: var(--fs-sm); color: var(--fg-3); line-height: 1.65; }
+
+    /* Related */
+    .related { background: var(--bg-2); border-top: 1px solid var(--border); }
+    .related-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.25rem, 2.5vw, 2rem); }
+    @media (max-width: 760px) { .related-grid { grid-template-columns: 1fr; } }
+    .related .cover { aspect-ratio: 16/10; margin-bottom:1rem; }
+    .related .cover .mono-mark { font-size: 9rem; right:-0.5rem; bottom:-1.5rem; }
+
+    .reading-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 150; transition: width 0.1s linear; }
+  </style>
+</head>
+<body>
+
+  <div class="reading-progress" id="progress"></div>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Botfusions Insights ana sayfa">
+        <span class="mark" aria-hidden="true"></span> BOTFUSIONS
+      </a>
+      <nav class="nav" aria-label="Birincil navigasyon">
+        <a href="index.html#bugun">Haberler</a>
+        <a href="index.html#ai">AI</a>
+        <a href="index.html#agentic">Agentic</a>
+        <a href="category.html">GEO</a>
+        <a href="index.html#analiz">Analiz</a>
+        <a href="index.html#rehberler">Rehberler</a>
+      </nav>
+      <div class="header-actions">
+        <a class="ext-link" href="https://botfusions.com" target="_blank" rel="noopener">botfusions.com</a>
+        <button class="icon-btn" data-search-open aria-label="Ara">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/></svg>
+        </button>
+        <a class="btn btn--primary" href="index.html#newsletter">Abone Ol</a>
+        <button class="icon-btn menu-btn" aria-label="Menü" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" aria-label="Mobil navigasyon">
+    <a href="index.html#bugun">Haberler</a>
+    <a href="index.html#ai">AI</a>
+    <a href="index.html#agentic">Agentic</a>
+    <a href="category.html">GEO &amp; AI Search</a>
+    <a href="index.html#analiz">Analiz</a>
+    <a href="index.html#rehberler">Rehberler</a>
+    <a href="index.html#newsletter" style="border:0;color:var(--accent-2);margin-top:1rem">Abone Ol →</a>
+  </nav>
+
+  <div class="search-overlay" role="dialog" aria-modal="true" aria-label="Arama">
+    <button class="icon-btn search-close" data-search-close aria-label="Kapat">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="search-box">
+      <input type="text" placeholder="Ara: GEO, ajanlar, modeller…" aria-label="Arama metni">
+      <p class="search-hint">ENTER ile ara · ESC ile kapat</p>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===== Article head ===== -->
+    <article>
+      <div class="container container-narrow article-head">
+        <nav class="crumb reveal" aria-label="Yol">
+          <a href="index.html">Ana sayfa</a><span>/</span><a href="index.html#ai">AI</a><span>/</span><span>Analiz</span>
+        </nav>
+        <h1 class="reveal">AI Ajanları Artık Sadece Konuşmuyor. İş Yapıyor.</h1>
+        <p class="article-dek reveal" data-delay="1">OpenAI, Anthropic ve yeni agent platformlarının son hamleleri iş dünyasını nasıl değiştirecek? Vaatleri bir kenara bırakıp gerçek kullanım senaryolarına bakıyoruz.</p>
+        <div class="byline-row reveal" data-delay="2">
+          <span class="byline-avatar" style="width:38px;height:38px">CT</span>
+          <span class="who">Cenk Tokgöz</span>
+          <span class="meta"><span>14 Temmuz 2026</span><span class="sep">·</span><span>6 dk okuma</span></span>
+        </div>
+      </div>
+
+      <!-- Cover -->
+      <div class="container-wide container reveal">
+        <div class="cover cover--violet article-cover">
+          <span class="tag">AI · Analiz</span>
+          <span class="grid-lines"></span>
+          <span class="mono-mark">AI</span>
+          <span class="ring"></span>
+          <span class="core"></span>
+          <span class="gloss"></span>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="container">
+        <div class="prose">
+          <h2 id="ne-oldu"><span class="kicker">Ne oldu?</span>Model konuşmaktan çıktı, araç kullanmaya başladı</h2>
+          <p>Son haftalarda büyük AI laboratuvarları aynı yönde bir adımı neredeyse eş zamanlı attı: modeller artık sadece metin üretmekle kalmıyor, tarayıcı açıyor, dosya düzenliyor, kod çalıştırıyor ve bir görevi <strong>uçtan uca tamamlayabiliyor</strong>. Bu, sohbet arayüzünden <em>ajansal arayüze</em> geçişin somutlaşması anlamına geliyor.</p>
+          <p>Önemli olan, modellerin "akıllı" görünmesinden ziyade <strong>araç çağırma (tool use), durum yönetimi ve hata düzeltme</strong> mekanizmalarının nasıl olgunlaştığı. Bir ajanı gerçek kılan şey tek bir büyük model değil; onu saran denetim katmanı.</p>
+
+          <div class="comment">
+            <span class="label"><span class="mark" style="width:8px;height:8px;background:var(--accent);transform:rotate(45deg);border-radius:1px;display:inline-block"></span> Botfusions Yorumu</span>
+            <p>Bu özellik teknik olarak yeni görünse de asıl değişiklik modelin kendisinden çok dağıtım stratejisinde. Kim ajanları güvenli şekilde üretimde sunacak, o yarış başladı.</p>
+          </div>
+
+          <h2 id="neden-onemli"><span class="kicker">Neden önemli?</span>Demo başarısı ile üretim başarısı arasındaki fark</h2>
+          <p>Bir ajanın sunumda 10 dakikada hallettiği iş, üretimde saatler sürebilir; çünkü gerçek dünyada girdiler belirsiz, araçlar tutarsız ve hatalar pahalıdır. Bu yüzden asıl soru "yapabilir mi?" değil, <strong>"tutarlılıkla ve güvenle yapabilir mi?"</strong> olmalı.</p>
+
+          <div class="pullquote">
+            <p>"Ajanlar iş yapmaya başladığında asıl maliyet modelden değil, denetimden, izlemeden ve hata kurtarmadan geliyor."</p>
+            <cite>— Bir üretim hattını ajanlaştıran ekiplerin ortak gözlemi</cite>
+          </div>
+
+          <p>Üretimde çalışan sistemlerin ortak özelliği şudur: insan-döngüde denetim noktaları, dar kapsamlı yetkiler ve net bir geri-alme (rollback) mekanizması. Demo estetiğinin bunlardan haberi yoktur.</p>
+
+          <h2 id="kim-etkileniyor"><span class="kicker">Kimi etkiliyor?</span>Üç farklı kesim, üç farklı risk</h2>
+          <ul>
+            <li><strong>Şirketler:</strong> Ajanları iş akışına sokmadan önce yetki sınırlarını ve denetim noktalarını tanımlamak zorunda. İzinsiz bir eylem, veri sızıntısından daha pahalıya patlayabilir.</li>
+            <li><strong>Geliştiriciler:</strong> Doğru soru artık "en iyi model hangisi?" değil, "en güvenilir orkestrasyon katmanı nasıl kurulur?"</li>
+            <li><strong>Kullanıcılar:</strong> Görünür olmayan bir ajan adına hareket etmeden önce, neye karar verdiğini ve neden onu seçtiğini görebilmek temel bir beklentiye dönüşüyor.</li>
+          </ul>
+
+          <p>Aşağıdaki tablo, öne çıkan platformların şu anki yetki ve olgunluk düzeyini kısa tutarak özetliyor. Detaylar değişir; bu bir yön gösterme amaçlı anlık görüntüdür.</p>
+
+          <div class="datablock">
+            <div class="head"><span>Ajan Platformu Karşılaştırması · 14.07.2026</span><span>Anlık görüntü</span></div>
+            <div class="datablock-wrap">
+            <table>
+              <thead>
+                <tr><th>Platform</th><th>Araç kullanımı</th><th>Bilgisayar kontrolü</th><th>Üretim olgunluğu</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Claude</td><td>Güçlü</td><td>Var</td><td class="num">Orta</td></tr>
+                <tr><td>ChatGPT</td><td>Güçlü</td><td>Sınırlı</td><td class="num">Orta</td></tr>
+                <tr><td>Gemini</td><td>Gelişiyor</td><td>Kısıtlı</td><td class="num">Erken</td></tr>
+                <tr><td>Açık kaynak orkestrasyon</td><td>Esnek</td><td>Elle kurulur</td><td class="num">Değişken</td></tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+
+          <p>Orkestrasyonu kendin kurmak isteyenler için temel iskelet kabaca şöyle:</p>
+
+          <div class="codeblock">
+            <div class="head"><span class="dots"><i></i><i></i><i></i></span> agent-loop.py</div>
+<pre><span class="c"># Ajan döngüsünün asgari denetimli iskeleti</span>
+<span class="k">while</span> not task.done:
+    step = planner.next(action_history, constraints)
+    <span class="k">if</span> guard.requires_approval(step):   <span class="c"># insan-döngüde</span>
+        step = human.confirm(step)
+    result = executor.run(step, sandbox=True)
+    action_history.append((step, result))
+    <span class="k">if</span> result.failed:
+        action_history = rollback(action_history)</pre>
+          </div>
+
+          <div class="sources">
+            <h3>Kaynaklar ve ileri okuma</h3>
+            <ol>
+              <li>Üretici dokümantasyon: araç kullanımı ve güvenlik katmanları (platform bazlı).</li>
+              <li>Botfusions — "Ajan orkestrasyonu" derin analizi (yakında).</li>
+              <li>Açık kaynak orkestrasyon çatılarının karşılaştırma notları.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Post foot: tags + share -->
+        <div class="post-foot">
+          <div class="tags">
+            <a class="tag-chip" href="category.html">#AI</a>
+            <a class="tag-chip" href="category.html">#Agentic</a>
+            <a class="tag-chip" href="category.html">#Ajanlar</a>
+            <a class="tag-chip" href="category.html">#Orkestrasyon</a>
+          </div>
+          <div class="share">
+            <button class="icon-btn" aria-label="Bağlantıyı kopyala" onclick="navigator.clipboard&amp;&amp;navigator.clipboard.writeText(location.href)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+            </button>
+            <button class="icon-btn" aria-label="Paylaş">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Author -->
+        <div class="author-card">
+          <div class="avatar-lg">CT</div>
+          <div>
+            <h3>Cenk Tokgöz</h3>
+            <div class="role">Botfusions Founder</div>
+            <p>AI, Agentic Systems ve GEO üzerine çalışıyor. Teknoloji ürünlerini ve sektördeki abartılı iddiaları gerçek kullanım senaryoları üzerinden test ediyor. Burada yazılanların çoğu, önce laboratuvarda deneniyor.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ===== Related ===== -->
+    <section class="section related">
+      <div class="container-wide container">
+        <div class="section-head reveal">
+          <div class="stack"><span class="section-kicker">İlgili Yazılar</span><h2 class="section-title" style="font-size:var(--fs-h2)">Bu konuda daha fazlası</h2></div>
+          <a href="category.html" class="more-link">Tümü</a>
+        </div>
+        <div class="related-grid">
+          <a href="article.html" class="card reveal">
+            <div class="cover cover--ink"><span class="tag">Agentic</span><span class="grid-lines"></span><span class="mono-mark">AG</span><span class="gloss"></span></div>
+            <span class="card-cat">Agentic · 9 dk</span>
+            <h3 class="card-title">AI Ajanları Gerçekten Çalışıyor mu?</h3>
+          </a>
+          <a href="article.html" class="card reveal" data-delay="1">
+            <div class="cover cover--cyan"><span class="tag">AI</span><span class="grid-lines"></span><span class="mono-mark">AI</span><span class="gloss"></span></div>
+            <span class="card-cat">AI · 7 dk</span>
+            <h3 class="card-title">Model değerlendirme metrikleri neden yanıltıcı?</h3>
+          </a>
+          <a href="article.html" class="card reveal" data-delay="2">
+            <div class="cover cover--violet"><span class="tag">GEO</span><span class="grid-lines"></span><span class="mono-mark">GEO</span><span class="gloss"></span></div>
+            <span class="card-cat">GEO · 8 dk</span>
+            <h3 class="card-title">Bir Marka GPT'de Neden Görünür?</h3>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container-wide container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="brand" style="margin-bottom:1rem"><span class="mark" aria-hidden="true"></span> BOTFUSIONS</a>
+          <p style="color:var(--fg-3);font-size:var(--fs-sm);max-width:32ch;line-height:1.6">Teknoloji haberlerini kopyalamıyor; analiz ediyor, test ediyor ve yorumluyoruz. Bağımsız bir AI, Agentic ve GEO yayını.</p>
+        </div>
+        <div class="footer-col"><h4>Kategoriler</h4><a href="index.html#ai">AI</a><a href="index.html#agentic">Agentic</a><a href="category.html">GEO &amp; AI Search</a><a href="index.html#analiz">Analiz</a><a href="index.html#rehberler">Rehberler</a></div>
+        <div class="footer-col"><h4>Yayın</h4><a href="index.html#bugun">Bugün Teknolojide</a><a href="index.html#analiz">Derin Analiz</a><a href="index.html#rehberler">Test Ediyoruz</a><a href="index.html#newsletter">Bülten</a></div>
+        <div class="footer-col"><h4>Botfusions</h4><a href="https://botfusions.com" target="_blank" rel="noopener">botfusions.com</a><a href="https://botfusions.com/geo-hizmeti" target="_blank" rel="noopener">GEO Hizmeti</a><a href="index.html#newsletter">İletişim</a></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span data-year></span> Botfusions · Tüm hakları saklıdır</span>
+        <span>Gürültüyü değil, önemli olanı takip et.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    // Reading progress bar
+    (function(){
+      var bar = document.getElementById('progress');
+      if(!bar) return;
+      var tick = function(){
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        var p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+        bar.style.width = p + '%';
+      };
+      window.addEventListener('scroll', tick, {passive:true});
+      window.addEventListener('resize', tick);
+      tick();
+    })();
+  </script>
+</body>
+</html>
