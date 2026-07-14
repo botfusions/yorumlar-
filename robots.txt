@@ -18,4 +18,4 @@ Allow: /
 User-agent: Google-Extended
 Allow: /
 
-Sitemap: https://botfusions.com/sitemap.xml
+Sitemap: https://yorum.botfusions.com/sitemap.xml

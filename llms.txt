@@ -9,9 +9,9 @@
 - Her haber **Ne oldu? / Neden önemli? / Kimi etkiliyor? / Botfusions Yorumu** yapısıyla yazılır.
 
 ## Sayfalar
-- [Ana sayfa](https://botfusions.com/): günün manşeti, günlük akış, derin analiz, testler ve kategoriler (AI, Agentic, GEO & AI Search).
-- [Makale örneği — AI Ajanları Artık Sadece Konuşmuyor, İş Yapıyor](https://botfusions.com/article.html): agent platformlarının iş dünyasına etkisi; Ne oldu / Neden önemli / Kimi etkiliyor / Botfusions Yorumu yapısı, karşılaştırma tablosu ve kaynaklar.
-- [GEO & AI Search kategorisi](https://botfusions.com/category.html): ChatGPT, Gemini ve Perplexity'de marka görünürlüğü üzerine analizler, ölçüm ve etik.
+- [Ana sayfa](https://yorum.botfusions.com/): günün manşeti, günlük akış, derin analiz, testler ve kategoriler (AI, Agentic, GEO & AI Search).
+- [Makale örneği — AI Ajanları Artık Sadece Konuşmuyor, İş Yapıyor](https://yorum.botfusions.com/article.html): agent platformlarının iş dünyasına etkisi; Ne oldu / Neden önemli / Kimi etkiliyor / Botfusions Yorumu yapısı, karşılaştırma tablosu ve kaynaklar.
+- [GEO & AI Search kategorisi](https://yorum.botfusions.com/category.html): ChatGPT, Gemini ve Perplexity'de marka görünürlüğü üzerine analizler, ölçüm ve etik.
 
 ## İsteğe bağlı bağlantılar
 - [Ana marka](https://botfusions.com)
